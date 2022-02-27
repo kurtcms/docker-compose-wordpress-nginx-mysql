@@ -1,0 +1,71 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name .ROOT_DOMAIN;
+
+        rewrite ^ https://ROOT_DOMAIN$request_uri? permanent;
+}
+
+server {
+        listen 443 ssl http2;
+        listen [::]:443 ssl http2;
+
+        server_name ROOT_DOMAIN;
+        root /var/www/html;
+        index index.php;
+
+        ssl_certificate /etc/letsencrypt/live/ROOT_DOMAIN/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/ROOT_DOMAIN/privkey.pem;
+
+        include /etc/nginx/conf.d/options-ssl-nginx.conf;
+
+        add_header X-Frame-Options "SAMEORIGIN" always;
+        add_header X-XSS-Protection "1; mode=block" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Referrer-Policy "no-referrer-when-downgrade" always;
+        add_header Content-Security-Policy "default-src * data: 'unsafe-eval' 'unsafe-inline'" always;
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+
+        client_max_body_size 512M;
+
+        location ~ /.well-known/acme-challenge {
+                allow all;
+                root /var/www/html;
+        }
+
+        location ~ /\.ht {
+                deny all;
+        }
+
+        location = /favicon.ico {
+                log_not_found off;
+                access_log off;
+        }
+
+        location = /robots.txt {
+                allow all;
+                log_not_found off;
+                access_log off;
+        }
+
+        location / {
+                try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+                try_files $uri =404;
+                include fastcgi_params;
+                fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+                fastcgi_intercept_errors on;
+                fastcgi_pass wordpress:9000;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param PATH_INFO $fastcgi_path_info;
+        }
+
+        location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+                expires max;
+                log_not_found off;
+        }
+}

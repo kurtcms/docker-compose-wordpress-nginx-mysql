@@ -1,0 +1,70 @@
+version: "3.1"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=$MYSQL_WORDPRESS_DATABASE
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    volumes:
+      - mysql:/var/lib/mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - network
+
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress:5.8.2-fpm-alpine
+    container_name: wordpress
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=mysql:3306
+      - WORDPRESS_DB_NAME=$MYSQL_WORDPRESS_DATABASE
+      - WORDPRESS_DB_USER=$MYSQL_WORDPRESS_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_WORDPRESS_PASSWORD
+    volumes:
+      - ./php-conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - wordpress:/var/www/html
+    networks:
+      - network
+
+  nginx:
+    depends_on:
+      - wordpress
+    image: nginx:1.21.4-alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot:/etc/letsencrypt
+      - wordpress:/var/www/html
+    networks:
+      - network
+    command: "/bin/sh -c 'while :; do sleep 24h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    depends_on:
+      - nginx
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot:/etc/letsencrypt
+      - wordpress:/var/www/html
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+volumes:
+  mysql:
+  wordpress:
+  certbot:
+
+networks:
+  network:
+    driver: bridge
