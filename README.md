@@ -4,7 +4,7 @@ This multi-container Docker app is orchestrated with [Docker Compose](https://do
 
 It creates a [WordPress](https://wordpress.com/) website on a [MySQL](https://www.mysql.com/) database and an [NGINX](https://www.nginx.com/) web server, with [Certbot](https://certbot.eff.org/) by the [Electronic Frontier Foundation](https://www.eff.org/) (EFF) for obtaining and renewing a SSL/TLS certificate on a given root domain from [Let’s Encrypt](https://letsencrypt.org/), a non-profit Certificate Authority by the [Internet Security Research Group](https://www.abetterinternet.org/) (ISRG).
 
-A detailed walk-though is available [here](https://kurtcms.org/docker-compose-wordpress-on-mysql-and-nginx-with-certbot/).
+A detailed walk-through is available [here](https://kurtcms.org/docker-compose-wordpress-on-mysql-and-nginx-with-certbot/).
 
 <img src="https://kurtcms.org/git/docker-compose-wordpress-nginx-mysql/docker-compose-wordpress-nginx-mysql-screenshot.png" width="550">
 
