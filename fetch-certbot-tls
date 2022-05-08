@@ -3,7 +3,7 @@
 read -p 'Root domain (e.g. kurtcms.org without the www subdomain): ' domain
 [ -z $domain ] && echo "Root domain cannot be empty" && exit 1
 
-read -p 'Email address for registration and recovery: ' email
+read -p 'Email address for registration and recovery with EFF: ' email
 [ -z $email ] && echo "Email cannot be empty" && exit 1
 
 # Generate an NGINX config with the given domain
@@ -21,7 +21,7 @@ sleep 3
 # Remove the dummy certificate and private key before requesting a signed TLS certificate with Certbot
 rm -r $(dirname $path)
 
-# Reques a signed TLS certificate with Certbot and restart NGINX to load the new certificate
+# Request a signed TLS certificate with Certbot and restart NGINX to load the new certificate
 docker-compose run --rm --entrypoint "certbot certonly --webroot --webroot-path=/var/www/html --email $email --agree-tos --eff-email --force-renewal -d $domain -d www.$domain" certbot
 docker-compose restart nginx
 
