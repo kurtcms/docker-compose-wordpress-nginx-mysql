@@ -7,8 +7,10 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      - MYSQL_DATABASE=$MYSQL_WORDPRESS_DATABASE
       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_WORDPRESS_DATABASE
+      - MYSQL_USER=$MYSQL_WORDPRESS_USER
+      - MYSQL_PASSWORD=$MYSQL_WORDPRESS_PASSWORD
     volumes:
       - mysql:/var/lib/mysql
     command: '--default-authentication-plugin=mysql_native_password'
