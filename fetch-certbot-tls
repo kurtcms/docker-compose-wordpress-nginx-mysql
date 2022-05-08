@@ -11,12 +11,11 @@ read -p 'Email address for registration and recovery with EFF: ' email
 
 docker-compose up -d
 
-# Create a dummy TLS certificate and private key for NGINX to start service
+# Create a dummy TLS certificate and private key and restart NGINX to load the dummy certificate
 dirname=$(echo $(basename $(pwd)) | sed "s/\.//")
 path=/var/lib/docker/volumes/${dirname}_certbot/_data/live/$domain/
 mkdir -p $path && openssl req -x509 -nodes -newkey rsa:4096 -days 1 -keyout ${path}privkey.pem -out ${path}fullchain.pem -subj '/CN=localhost'
-
-sleep 3
+docker-compose restart nginx
 
 # Remove the dummy certificate and private key before requesting a signed TLS certificate with Certbot
 rm -r $(dirname $path)
