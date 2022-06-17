@@ -71,8 +71,8 @@ With Docker Compose, the app may be provisioned with a single command.
 Install [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) with the Bash script that comes with app.
 
 ```shell
-$ chmod +x /app/docker-compose-wordpress-nginx-mysql/install_docker_compose \
-    && /app/docker-compose-wordpress-nginx-mysql/install_docker_compose
+$ chmod +x /app/docker-compose-wordpress-nginx-mysql/install-docker-compose \
+    && /app/docker-compose-wordpress-nginx-mysql/install-docker-compose
 ```
 
 #### SSL/TLS Certificate
