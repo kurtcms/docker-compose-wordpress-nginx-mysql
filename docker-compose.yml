@@ -1,4 +1,10 @@
-version: "3.1"
+version: '3.1'
+
+x-logging: &logging
+  driver: 'json-file'
+  options:
+    max-size: '20m'
+    max-file: '5'
 
 services:
   mysql:
@@ -13,6 +19,7 @@ services:
       - MYSQL_PASSWORD=$MYSQL_WORDPRESS_PASSWORD
     volumes:
       - mysql:/var/lib/mysql
+    logging: *logging
     command: '--default-authentication-plugin=mysql_native_password'
     networks:
       - network
@@ -32,6 +39,7 @@ services:
     volumes:
       - ./php-conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - wordpress:/var/www/html
+    logging: *logging
     networks:
       - network
 
@@ -48,6 +56,7 @@ services:
       - ./nginx-conf:/etc/nginx/conf.d
       - certbot:/etc/letsencrypt
       - wordpress:/var/www/html
+    logging: *logging
     networks:
       - network
     command: "/bin/sh -c 'while :; do sleep 24h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
@@ -60,6 +69,7 @@ services:
     volumes:
       - certbot:/etc/letsencrypt
       - wordpress:/var/www/html
+    logging: *logging
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
