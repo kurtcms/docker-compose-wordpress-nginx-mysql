@@ -190,3 +190,8 @@ Modify the values as appropriate.
 - [Docker Hub - WordPress](https://hub.docker.com/_/wordpress)
 - [Docker Hub - NGINX](https://hub.docker.com/_/nginx)
 - [Docker Hub - Certbot](https://hub.docker.com/r/certbot/certbot)
+
+
+### Infrastructure model
+
+![Infrastructure model](.infragenie/infrastructure_model.png)
