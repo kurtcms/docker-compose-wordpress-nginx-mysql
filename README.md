@@ -6,7 +6,7 @@ It creates a [WordPress](https://wordpress.com/) website on a [MySQL](https://ww
 
 A detailed walk-through is available [here](https://kurtcms.org/docker-compose-wordpress-on-mysql-and-nginx-with-certbot/).
 
-<img src="https://kurtcms.org/git/docker-compose-wordpress-nginx-mysql/docker-compose-wordpress-nginx-mysql-screenshot.png" width="550">
+<img src="https://github.com/kurtcms/docker-compose-wordpress-nginx-mysql/blob/master/screenshot.png" width="550">
 
 ## Table of Content
 
