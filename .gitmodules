@@ -1,3 +1,6 @@
 [submodule "docker-compose"]
 	path = docker-compose
 	url = https://github.com/kurtcms/docker-compose
+[submodule "certbot"]
+	path = certbot
+	url = https://github.com/kurtcms/certbot

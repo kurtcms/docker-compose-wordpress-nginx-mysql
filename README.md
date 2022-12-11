@@ -80,8 +80,8 @@ A dummy SSL/TLS certificate and private key will need to be created for NGINX to
 Create the dummy certificate before obtaining a signed one with the Bash script that comes with app.
 
 ```shell
-$ chmod +x /app/docker-compose-wordpress-nginx-mysql/fetch-certbot-tls \
-    && /app/docker-compose-wordpress-nginx-mysql/fetch-certbot-tls
+$ chmod +x /app/docker-compose-wordpress-nginx-mysql/certbot/certbot.sh \
+    && /app/docker-compose-wordpress-nginx-mysql/certbot/certbot.sh
 ```
 
 Enter the root domain and the email address for registration and recovery when prompted.
