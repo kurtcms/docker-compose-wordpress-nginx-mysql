@@ -2,7 +2,7 @@
 
 This multi-container Docker app is orchestrated with [Docker Compose](https://docs.docker.com/compose/) for rapid and modular deployment that fits in any microservice architecture.
 
-It creates a [WordPress](https://wordpress.com/) website on a [MySQL](https://www.mysql.com/) database and an [NGINX](https://www.nginx.com/) web server, with [Certbot](https://certbot.eff.org/) by the [Electronic Frontier Foundation](https://www.eff.org/) (EFF) for obtaining and renewing a SSL/TLS certificate on a given root domain from [Let’s Encrypt](https://letsencrypt.org/), a non-profit Certificate Authority by the [Internet Security Research Group](https://www.abetterinternet.org/) (ISRG).
+It creates a [WordPress](https://wordpress.com/) website on a [MySQL](https://www.mysql.com/) database and an [NGINX](https://www.nginx.org/) web server, with [Certbot](https://certbot.eff.org/) by the [Electronic Frontier Foundation](https://www.eff.org/) (EFF) for obtaining and renewing a SSL/TLS certificate on a given root domain from [Let’s Encrypt](https://letsencrypt.org/), a non-profit Certificate Authority by the [Internet Security Research Group](https://www.abetterinternet.org/) (ISRG).
 
 A detailed walk-through is available [here](https://kurtcms.org/docker-compose-wordpress-on-mysql-and-nginx-with-certbot/).
 
@@ -27,7 +27,7 @@ A detailed walk-through is available [here](https://kurtcms.org/docker-compose-w
 Get started in three simple steps:
 
 1. [Download](#git-clone) a copy of the app;
-2. Create the [environment variables](#environment-variables) for the MySQL root password and the WordPress database settings;
+2. Create the [environment variables](#environment-variables) for the MySQL root password and the WordPress database settings; and
 3. [Docker Compose](#docker-compose) to start the app.
 
 ### Git Clone
@@ -35,7 +35,7 @@ Get started in three simple steps:
 Download a copy of the app with `git clone`
 
 ```shell
-$ git clone https://github.com/kurtcms/docker-compose-wordpress-nginx-mysql /app/
+$ git clone https://github.com/kurtcms/docker-compose-wordpress-nginx-mysql /app/docker-compose-wordpress-nginx-mysql/
 ```
 
 ### Environment Variables
