@@ -91,13 +91,13 @@ Enter the root domain and the email address for registration and recovery when p
 Start the containers with Docker Compose.
 
 ```shell
-$ docker-compose up -d
+$ docker-compose -f /app/docker-compose-wordpress-nginx-mysql/docker-compose.yml up -d
 ```
 
 Stopping the containers is as simple as a single command.
 
 ```shell
-$ docker-compose down
+$ docker-compose -f /app/docker-compose-wordpress-nginx-mysql/docker-compose.yml down
 ```
 
 ## Backup and Restore
