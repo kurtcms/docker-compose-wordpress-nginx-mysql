@@ -2,7 +2,7 @@
 
 This multi-container Docker app is orchestrated with [Docker Compose](https://docs.docker.com/compose/) for rapid and modular deployment that fits in any microservice architecture.
 
-It creates a [WordPress](https://wordpress.com/) website on a [MySQL](https://www.mysql.com/) database and an [NGINX](https://www.nginx.org/) web server, with [Certbot](https://certbot.eff.org/) by the [Electronic Frontier Foundation](https://www.eff.org/) (EFF) for obtaining and renewing a SSL/TLS certificate on a given root domain from [Let’s Encrypt](https://letsencrypt.org/), a non-profit Certificate Authority by the [Internet Security Research Group](https://www.abetterinternet.org/) (ISRG).
+It creates a [WordPress](https://wordpress.com/) website on a [MySQL](https://www.mysql.com/) database and an [NGINX](https://www.nginx.org/) web server, with [Certbot](https://certbot.eff.org/) by the [Electronic Frontier Foundation](https://www.eff.org/) (EFF) for obtaining and renewing a signed SSL/TLS certificate on a given root domain from [Let’s Encrypt](https://letsencrypt.org/), a non-profit Certificate Authority by the [Internet Security Research Group](https://www.abetterinternet.org/) (ISRG).
 
 A detailed walk-through is available [here](https://kurtcms.org/docker-compose-wordpress-on-mysql-and-nginx-with-certbot/).
 
@@ -106,7 +106,7 @@ With the Docker containers up and running, WordPress will be reachable at the lo
 
 ### Docker Volume
 
-The MySQL database, the WordPress content as well as the SSL/TLS certificate and its corresponding private key are stored in separate `Docker volume` under `/var/lib/docker/volumes/`.
+The MySQL database, the WordPress content as well as the signed SSL/TLS certificate and its corresponding private key are stored in separate `Docker volume` under `/var/lib/docker/volumes/`.
 
 ```
 /var/
